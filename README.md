@@ -5,3 +5,10 @@ I miss the old days, we didn’t need rules, guidelines or even a teamfinder. Yo
 
 Everyone all about this sweaty duolog stuff lately & “sub 17s” but where’s the community, the spirit & the fkn brews
 
+
+
+
+
+
+What the heck did you just fricking say about me, you little torso hunter? Ill have you know I passed all my trials in BA Services, and I’ve been involved in numerous leeches, and I have over 300 confirmed high gambles. I am trained in overstock healing and I’m the top healer in the entire Speed running community. You are nothing to me but just another torso hunter. I will wipe you the frick out with speed runs the likes of which has never been seen before on this earth, mark my fucking words. You think you can get away with saying that shit to me over the internet? Think again, you mid-runner. As we speak I am contacting my secret network of wave 1 line dancers and our dance is being prepared right now, so you better prepare for the storm, maggot. The storm that wipes out your pathetic little player from wave 1. You’re fricking dead, kid. I can be any role, at any time and I can kill runners in over seven hundred ways, and that’s just with the west trap. Not only am I extensively trained in one-egging, but I have access to the entire arsenal of animation delay items and I will use it to its full extent to delay your games for eternity, you little shit. If only you could have known what unholy retribution your little “clever” comment was about to bring down upon you, maybe you would have held your fricking penance horn, but you couldn’t, you didn’t, you called the wrong attack style and now you’re paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You’re fricking dead kiddo.
+
