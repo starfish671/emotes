@@ -12,3 +12,21 @@ Everyone all about this sweaty duolog stuff lately & “sub 17s” but where’s
 
 What the heck did you just fricking say about me, you little torso hunter? Ill have you know I passed all my trials in BA Services, and I’ve been involved in numerous leeches, and I have over 300 confirmed high gambles. I am trained in overstock healing and I’m the top healer in the entire Speed running community. You are nothing to me but just another torso hunter. I will wipe you the frick out with speed runs the likes of which has never been seen before on this earth, mark my fucking words. You think you can get away with saying that shit to me over the internet? Think again, you mid-runner. As we speak I am contacting my secret network of wave 1 line dancers and our dance is being prepared right now, so you better prepare for the storm, maggot. The storm that wipes out your pathetic little player from wave 1. You’re fricking dead, kid. I can be any role, at any time and I can kill runners in over seven hundred ways, and that’s just with the west trap. Not only am I extensively trained in one-egging, but I have access to the entire arsenal of animation delay items and I will use it to its full extent to delay your games for eternity, you little shit. If only you could have known what unholy retribution your little “clever” comment was about to bring down upon you, maybe you would have held your fricking penance horn, but you couldn’t, you didn’t, you called the wrong attack style and now you’re paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You’re fricking dead kiddo.
 
+Dear Slim, I wrote you but still ain't callin'
+I left my cell, my pager, and my home phone at the bottom
+I sent two letters back in autumn, you must not've got 'em
+There probably was a problem at the post office or somethin'
+Sometimes I scribble addresses, too sloppy when I jot 'em
+But anyways, fuck it, what's been up? Man, how's your daughter?
+My girlfriend's pregnant too, I'm 'bout to be a father
+If I have a daughter, guess what I'm a call her?
+I'ma name her Bonnie
+I read about your Uncle Ronnie too, I'm sorry
+I had a friend kill himself over some bitch who didn't want him
+I know you probably hear this every day, but I'm your biggest fan
+I even got the underground shit that you did with Skam
+I got a room full of your posters and your pictures, man
+I like the shit you did with Rawkus too, that shit was phat
+Anyways, I hope you get this, man, hit me back
+Just to chat, truly yours, your biggest fan
+This is Stan
