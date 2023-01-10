@@ -1,0 +1,15 @@
+# these macros won't be needed if doing non-scl build, so define them in a way that won't overwrite system ones
+%@scl@_os_install_post \
+    /usr/lib/rpm/brp-scl-compress %{_scl_root} \
+    %{!?__debug_package:/usr/lib/rpm/redhat/brp-strip %{__strip} \
+    /usr/lib/rpm/redhat/brp-strip-comment-note %{__strip} %{__objdump} \
+    } \
+    /usr/lib/rpm/redhat/brp-strip-static-archive %{__strip} \
+    %{!?_turn_off_bytecompile:scl enable @vendorscl@ '/usr/lib/rpm/redhat/brp-python-bytecompile-with-scl-python-38 %@scl@__python3 %{?_python_bytecompile_errors_terminate_build}'} \
+    /usr/lib/rpm/redhat/brp-python-hardlink
+
+%@scl@_python_provides /usr/lib/rpm/pythondeps-scl-38.sh --provides %{?scl:@vendorscl@-}
+%@scl@_python_requires /usr/lib/rpm/pythondeps-scl-38.sh --requires %{?scl:@vendorscl@-}
+
+%_python_bytecompile_errors_terminate_build 1
+

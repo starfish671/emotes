@@ -1,0 +1,76 @@
+From dddfc63d5991462d214e86514fa06eff0707996a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Miro=20Hron=C4=8Dok?= <miro@hroncok.cz>
+Date: Wed, 15 Aug 2018 15:36:29 +0200
+Subject: [PATCH] 00189: Instead of bundled wheels, use our RPM packaged wheels
+
+We keep them in /usr/share/python-wheels
+
+Downstream only: upstream bundles
+We might eventually pursuit upstream support, but it's low prio
+---
+ Lib/ensurepip/__init__.py | 36 ++++++++++++++++++++++++++----------
+ 1 file changed, 26 insertions(+), 10 deletions(-)
+
+diff --git a/Lib/ensurepip/__init__.py b/Lib/ensurepip/__init__.py
+index 88ddc63..0d02cfa 100644
+--- a/Lib/ensurepip/__init__.py
++++ b/Lib/ensurepip/__init__.py
+@@ -1,6 +1,7 @@
++import distutils.version
++import glob
+ import os
+ import os.path
+-import pkgutil
+ import sys
+ import runpy
+ import tempfile
+@@ -9,8 +10,26 @@ import subprocess
+ 
+ __all__ = ["version", "bootstrap"]
+ _PACKAGE_NAMES = ('setuptools', 'pip')
+-_SETUPTOOLS_VERSION = "56.0.0"
+-_PIP_VERSION = "22.0.4"
++
++_WHEEL_DIR = "/opt/rh/rh-python38/root/usr/share/python38-wheels/"
++
++_wheels = {}
++
++def _get_most_recent_wheel_version(pkg):
++    prefix = os.path.join(_WHEEL_DIR, "{}-".format(pkg))
++    _wheels[pkg] = {}
++    for suffix in "-py2.py3-none-any.whl", "-py3-none-any.whl":
++        pattern = "{}*{}".format(prefix, suffix)
++        for path in glob.glob(pattern):
++            version_str = path[len(prefix):-len(suffix)]
++            _wheels[pkg][version_str] = os.path.basename(path)
++    return str(max(_wheels[pkg], key=distutils.version.LooseVersion))
++
++
++_SETUPTOOLS_VERSION = _get_most_recent_wheel_version("setuptools")
++
++_PIP_VERSION = _get_most_recent_wheel_version("pip")
++
+ _PROJECTS = [
+     ("setuptools", _SETUPTOOLS_VERSION, "py3"),
+     ("pip", _PIP_VERSION, "py3"),
+@@ -104,13 +123,10 @@ def _bootstrap(*, root=None, upgrade=False, user=False,
+         # additional paths that need added to sys.path
+         additional_paths = []
+         for project, version, py_tag in _PROJECTS:
+-            wheel_name = "{}-{}-{}-none-any.whl".format(project, version, py_tag)
+-            whl = pkgutil.get_data(
+-                "ensurepip",
+-                "_bundled/{}".format(wheel_name),
+-            )
+-            with open(os.path.join(tmpdir, wheel_name), "wb") as fp:
+-                fp.write(whl)
++            wheel_name = _wheels[project][version]
++            with open(os.path.join(_WHEEL_DIR, wheel_name), "rb") as sfp:
++                with open(os.path.join(tmpdir, wheel_name), "wb") as fp:
++                    fp.write(sfp.read())
+ 
+             additional_paths.append(os.path.join(tmpdir, wheel_name))
+ 
+-- 
+2.37.2
+

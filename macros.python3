@@ -1,0 +1,69 @@
+# define these macros in a way which will expand them to correct values even for non-scl-build, assuming 's/@scl@//'
+%@scl@__python3
+%@scl@__python %@scl@__python3
+%@scl@python3_sitelib %(%{?scl:scl enable @vendorscl@ '}%{@scl@__python3} -Ic "from distutils.sysconfig import get_python_lib; print(get_python_lib())"%{?scl:'})
+%@scl@python3_sitearch %(%{?scl:scl enable @vendorscl@ '}%{@scl@__python3} -Ic "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))"%{?scl:'})
+
+%@scl@python3_version %(%{?scl:scl enable @vendorscl@ '}%{@scl@__python3} -Ic "import sys; sys.stdout.write(sys.version[:3])"%{?scl:'})
+%@scl@python3_version_nodots %(%{?scl:scl enable @vendorscl@ "}%{@scl@__python3} -Ic \\"import sys; sys.stdout.write(sys.version[:3].replace('.',''))\\"%{?scl:'})
+
+%@scl@python3_platform %(%{?scl:scl enable @vendorscl@ '}%{@scl@__python3} -Ic "import sysconfig; print(sysconfig.get_platform())"%{?scl:'})
+%@scl@py3dir %{_builddir}/python3-%{name}-%{version}-%{release}
+
+%@scl@py_setup setup.py
+%@scl@py3_shbang_opts -s
+
+# Use the slashes after expand so that the command starts on the same line as
+# the macro
+%@scl@py3_build() %{expand:\\\
+  %{?scl:scl enable @vendorscl@ '}\\\
+  CFLAGS="${CFLAGS:-${RPM_OPT_FLAGS}}" LDFLAGS="${LDFLAGS:-${RPM_LD_FLAGS}}"\\\
+  %{@scl@__python3} %{@scl@py_setup} %{?py_setup_args} build --executable="%{@scl@__python3} %{@scl@py3_shbang_opts}" %{?*}\\\
+  %{?scl:'}
+  sleep 1
+}
+
+%@scl@py3_build_egg() %{expand:\\\
+  %{?scl:scl enable @vendorscl@ '}\\\
+  CFLAGS="${CFLAGS:-${RPM_OPT_FLAGS}}" LDFLAGS="${LDFLAGS:-${RPM_LD_FLAGS}}"\\\
+  %{@scl@__python3} %{@scl@py_setup} %{?py_setup_args} bdist_egg %{?*}\\\
+  %{?scl:'}
+  sleep 1
+}
+
+%@scl@py3_build_wheel() %{expand:\\\
+  %{?scl:scl enable @vendorscl@ '}\\\
+  CFLAGS="${CFLAGS:-${RPM_OPT_FLAGS}}" LDFLAGS="${LDFLAGS:-${RPM_LD_FLAGS}}"\\\
+  %{@scl@__python3} %{@scl@py_setup} %{?py_setup_args} bdist_wheel %{?*}\\\
+  %{?scl:'}
+  sleep 1
+}
+
+%@scl@py3_install() %{expand:\\\
+  %{?scl:scl enable @vendorscl@ '}\\\
+  CFLAGS="${CFLAGS:-${RPM_OPT_FLAGS}}" LDFLAGS="${LDFLAGS:-${RPM_LD_FLAGS}}"\\\
+  %{@scl@__python3} %{@scl@py_setup} %{?py_setup_args} install -O1 --skip-build --root %{buildroot} %{?*}\\\
+  %{?scl:'}
+}
+
+%@scl@py3_install_egg() %{expand:\\\
+  mkdir -p %{buildroot}%{python3_sitelib}
+  %{?scl:scl enable @vendorscl@ '}\\\
+  CFLAGS="%{optflags}" %{@scl@__python3} -m easy_install -m --prefix %{buildroot}%{_prefix} -Z dist/*-py%{python3_version}.egg %{?*}\\\
+  %{?scl:'}
+}
+
+%@scl@py3_install_wheel() %{expand:\\\
+  %{?scl:scl enable @vendorscl@ '}\\\
+  CFLAGS="%{optflags}" %{@scl@__python3} -m pip install -I dist/%{1} --root %{buildroot} --no-deps\\\
+  %{?scl:'}
+}
+
+%@scl@py3_install_wheel_start() %{expand:\\\
+  %{?scl:scl enable @vendorscl@ '}\\\
+  CFLAGS="%{optflags}" %{python38__python3} -m pip install -I dist/}
+
+%@scl@py3_install_wheel_end() %{expand:\\\
+  --root %{buildroot} --no-deps\\\
+  %{?scl:'}\\\
+}

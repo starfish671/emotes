@@ -1,0 +1,78 @@
+diff -up Python-3.4.2/configure.ac.major Python-3.4.2/configure.ac
+--- Python-3.4.2/configure.ac.major	2014-12-11 12:03:47.436971603 +0100
++++ Python-3.4.2/configure.ac	2014-12-11 12:05:33.435973233 +0100
+@@ -114,7 +114,7 @@ VERSION=PYTHON_VERSION
+ 
+ # Version number of Python's own shared library file.
+ AC_SUBST(SOVERSION)
+-SOVERSION=1.0
++SOVERSION=__SCL_NAME__-1.0
+ 
+ # The later defininition of _XOPEN_SOURCE disables certain features
+ # on Linux, so we need _GNU_SOURCE to re-enable them (makedev, tm_zone).
+diff -up Python-3.4.2/configure.major Python-3.4.2/configure
+--- Python-3.4.2/configure.major	2014-12-11 12:03:39.210893871 +0100
++++ Python-3.4.2/configure	2014-12-11 12:05:18.334830535 +0100
+@@ -3005,7 +3005,7 @@ VERSION=3.4
+ 
+ # Version number of Python's own shared library file.
+ 
+-SOVERSION=1.0
++SOVERSION=__SCL_NAME__-1.0
+ 
+ # The later defininition of _XOPEN_SOURCE disables certain features
+ # on Linux, so we need _GNU_SOURCE to re-enable them (makedev, tm_zone).
+diff -up Python-3.4.2/configure.ac.scl Python-3.4.2/configure.ac
+--- Python-3.4.2/configure.ac.scl	2014-12-11 14:05:25.169171359 +0100
++++ Python-3.4.2/configure.ac	2014-12-11 14:07:10.945155431 +0100
+@@ -953,7 +953,7 @@ if test $enable_shared = "yes"; then
+ 	  INSTSONAME="$LDLIBRARY".$SOVERSION
+ 	  if test "$with_pydebug" != yes
+ 	  then
+-	      PY3LIBRARY=libpython3.so
++	      PY3LIBRARY=libpython3.so.__SCL_NAME__
+ 	  fi
+           ;;
+     Linux*|GNU*|NetBSD*|FreeBSD*|DragonFly*|OpenBSD*)
+@@ -968,7 +968,7 @@ if test $enable_shared = "yes"; then
+ 	  INSTSONAME="$LDLIBRARY".$SOVERSION
+ 	  if test "$with_pydebug" != yes
+           then
+-	      PY3LIBRARY=libpython3.so
++	      PY3LIBRARY=libpython3.so.__SCL_NAME__
+ 	  fi
+ 	  ;;
+     hp*|HP*)
+diff -up Python-3.4.2/configure.scl Python-3.4.2/configure
+--- Python-3.4.2/configure.scl	2014-12-11 14:05:16.490090615 +0100
++++ Python-3.4.2/configure	2014-12-11 14:06:42.207888078 +0100
+@@ -5641,7 +5641,7 @@ $as_echo "#define Py_ENABLE_SHARED 1" >>
+ 	  INSTSONAME="$LDLIBRARY".$SOVERSION
+ 	  if test "$with_pydebug" != yes
+ 	  then
+-	      PY3LIBRARY=libpython3.so
++	      PY3LIBRARY=libpython3.so.__SCL_NAME__
+ 	  fi
+           ;;
+     Linux*|GNU*|NetBSD*|FreeBSD*|DragonFly*|OpenBSD*)
+@@ -5656,7 +5656,7 @@ $as_echo "#define Py_ENABLE_SHARED 1" >>
+ 	  INSTSONAME="$LDLIBRARY".$SOVERSION
+ 	  if test "$with_pydebug" != yes
+           then
+-	      PY3LIBRARY=libpython3.so
++	      PY3LIBRARY=libpython3.so.__SCL_NAME__
+ 	  fi
+ 	  ;;
+     hp*|HP*)
+diff -up Python-3.4.2/Makefile.pre.in.scl Python-3.4.2/Makefile.pre.in
+--- Python-3.4.2/Makefile.pre.in.scl	2014-12-11 14:29:07.244473958 +0100
++++ Python-3.4.2/Makefile.pre.in	2014-12-11 14:29:28.449674732 +0100
+@@ -581,7 +581,7 @@ libpython$(LDVERSION).so: $(LIBRARY_OBJS
+ 		$(BLDSHARED) -o $@ $(LIBRARY_OBJS) $(MODLIBS) $(SHLIBS) $(LIBC) $(LIBM) $(LDLAST); \
+ 	fi
+ 
+-libpython3.so:	libpython$(LDVERSION).so
++libpython3.so.__SCL_NAME__:	libpython$(LDVERSION).so
+ 	$(BLDSHARED) $(NO_AS_NEEDED) -o $@ -Wl,-h$@ $^
+ 
+ libpython$(LDVERSION).dylib: $(LIBRARY_OBJS)

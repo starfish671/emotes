@@ -1,0 +1,24 @@
+# Note that the path could itself be a python file, or a directory
+
+# Python's compile_all module only works on directories, and requires a max
+# recursion depth
+
+# Usage:
+#    %py_byte_compile <interpereter> <path>
+# Example:
+#    %py_byte_compile %{__python3} %{buildroot}%{_datadir}/spam/plugins/
+
+# This will terminate build on SyntaxErrors, if you want to avoid that,
+# use it in a subshell like this:
+#    (%{py_byte_compile <interpereter> <path>}) || :
+
+%py_byte_compile()\
+python_binary="%1"\
+buildroot_path="%2"\
+bytecode_compilation_path=".${buildroot_path/#$RPM_BUILD_ROOT}"\
+failure=0\
+pushd $RPM_BUILD_ROOT\
+find $bytecode_compilation_path -type f -a -name "*.py" -print0 | xargs -0 $python_binary -O -m py_compile || failure=1\
+find $bytecode_compilation_path -type f -a -name "*.py" -print0 | xargs -0 $python_binary -m py_compile || failure=1\
+popd\
+test $failure -eq 0
